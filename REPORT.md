@@ -28,7 +28,7 @@ Paste your checkpoint evidence below. Add screenshots as image files in the repo
 
 ## Task 3B — Traces
 
-<!-- Screenshots: healthy trace span hierarchy, error trace -->
+![VictoriaTraces UI - trace span hierarchy](docs/screenshots/task-3b-traces.png)
 
 ## Task 3C — Observability MCP tools
 
