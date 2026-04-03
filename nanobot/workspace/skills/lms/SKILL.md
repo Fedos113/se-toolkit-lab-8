@@ -14,22 +14,22 @@ You have access to the Learning Management System (LMS) via MCP tools. Use them 
 |------|-------------|------------|
 | `lms_labs` | List all available labs. Call this FIRST when the user asks about scores, pass rates, completion, groups, timeline, or top learners without naming a specific lab. | None |
 | `lms_health` | Check if the LMS backend is healthy and how many items it has. Use when asked about system health. | None |
+| `lms_learners` | List all learners registered in the LMS. | None |
 | `lms_pass_rates` | Get average scores and attempt counts per task for a specific lab. | `lab` (e.g., "lab-01") |
 | `lms_completion_rate` | Get passed/total completion rate for a specific lab. | `lab` (e.g., "lab-01") |
 | `lms_timeline` | Get submission timeline (date + count) for a lab. | `lab` (e.g., "lab-01") |
 | `lms_groups` | Get group performance (avg score + student count) for a lab. | `lab` (e.g., "lab-01") |
 | `lms_top_learners` | Get top learners by average score for a lab. Use `limit` param (default 5). | `lab`, `limit` |
-| `lms_learners` | List all learners registered in the LMS. | None |
-| `lms_sync_pipeline` | Trigger the ETL sync pipeline if data seems stale or empty. | None |
-| `lms_labs` | Trigger the ETL sync pipeline if data seems stale or empty. | None |
+| `lms_sync_pipeline` | Trigger the ETL sync pipeline if data seems stale or empty. May take a moment. | None |
 
 ## Strategy
 
 1. **If the user asks for scores, pass rates, completion, groups, timeline, or top learners WITHOUT naming a lab:**
    - Call `lms_labs` first to get the list of available labs
-   - If multiple labs exist, ask the user to choose one
+   - If multiple labs exist, present the available options to the user and ask them to choose one
    - Use each lab's title/label (as returned by `lms_labs`) as the user-facing label
    - Provide stable lab values (e.g., "lab-01", "lab-02") that can be reused in follow-up tool calls
+   - On supported chat channels (e.g., WebSocket web chat), let the shared `structured-ui` skill decide how to present that choice interactively
 
 2. **If a lab parameter is needed but not provided by the user:**
    - Ask the user which lab they mean before proceeding
